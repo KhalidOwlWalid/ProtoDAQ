@@ -2,20 +2,20 @@ project(ProtoDAQ)
 
 set(CMAKE_CXX_STANDARD 14)
 
-#fetched these using vcpkg manager
-# If user does not have glfw3_FOUND, then install it for them
+# TODO (Khalid): If user does not have glfw3_FOUND, then install it for them
 find_package(glfw3 CONFIG REQUIRED) # sudo apt-get install libglfw3 libglfw3-dev
 
 # By default, linux should already has this
 find_package(SDL2 REQUIRED)
 
-# Help the user install by checking if it exists or not
+# TODO (Khalid): Help the user install by checking if it exists or not
 find_package(OpenGL REQUIRED)
 
 set(PROTODAQ_MODULES_BASE_DIR 
     ${PROJECT_SOURCE_DIR}/external/modules
 )
 
+# Build static library (libglad.a) for imgui
 add_library(glad STATIC ${PROTODAQ_MODULES_BASE_DIR}/glad/glad.c)
 target_include_directories(glad PUBLIC ${PROTODAQ_MODULES_BASE_DIR}/glad)
 

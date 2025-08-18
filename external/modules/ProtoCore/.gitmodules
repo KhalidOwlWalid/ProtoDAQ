@@ -1,9 +1,0 @@
-[submodule "external/modules/mavlink"]
-	path = external/modules/mavlink
-	url = git@github.com:mavlink/mavlink.git
-[submodule "external/modules/spdlog"]
-	path = external/modules/spdlog
-	url = git@github.com:gabime/spdlog.git
-[submodule "external/modules/libcanard"]
-	path = external/modules/libcanard
-	url = git@github.com:dronecan/libcanard.git
