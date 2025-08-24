@@ -14,7 +14,7 @@ public:
     ~App() = default;
 
     virtual bool init(const std::vector<DAQ_Protocol> protocols);
-    virtual void update();
+    virtual void run();
     virtual void shutdown();
 
     void set_running_flag(const bool flag);

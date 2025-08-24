@@ -2206,24 +2206,24 @@ void ShowDemoWindow(bool* p_open) {
     if (ImGui::BeginTabBar("ImPlotDemoTabs")) {
         if (ImGui::BeginTabItem("Plots")) {
             DemoHeader("Line Plots", Demo_LinePlots);
-            // DemoHeader("Filled Line Plots", Demo_FilledLinePlots);
-            // DemoHeader("Shaded Plots##", Demo_ShadedPlots);
+            DemoHeader("Filled Line Plots", Demo_FilledLinePlots);
+            DemoHeader("Shaded Plots##", Demo_ShadedPlots);
             DemoHeader("Scatter Plots", Demo_ScatterPlots);
             DemoHeader("Realtime Plots", Demo_RealtimePlots);
-            // DemoHeader("Stairstep Plots", Demo_StairstepPlots);
-            // DemoHeader("Bar Plots", Demo_BarPlots);
-            // DemoHeader("Bar Groups", Demo_BarGroups);
-            // DemoHeader("Bar Stacks", Demo_BarStacks);
-            // DemoHeader("Error Bars", Demo_ErrorBars);
-            // DemoHeader("Stem Plots##", Demo_StemPlots);
-            // DemoHeader("Infinite Lines", Demo_InfiniteLines);
-            // DemoHeader("Pie Charts", Demo_PieCharts);
-            // DemoHeader("Heatmaps", Demo_Heatmaps);
-            // DemoHeader("Histogram", Demo_Histogram);
+            DemoHeader("Stairstep Plots", Demo_StairstepPlots);
+            DemoHeader("Bar Plots", Demo_BarPlots);
+            DemoHeader("Bar Groups", Demo_BarGroups);
+            DemoHeader("Bar Stacks", Demo_BarStacks);
+            DemoHeader("Error Bars", Demo_ErrorBars);
+            DemoHeader("Stem Plots##", Demo_StemPlots);
+            DemoHeader("Infinite Lines", Demo_InfiniteLines);
+            DemoHeader("Pie Charts", Demo_PieCharts);
+            DemoHeader("Heatmaps", Demo_Heatmaps);
+            DemoHeader("Histogram", Demo_Histogram);
             DemoHeader("Histogram 2D", Demo_Histogram2D);
-            // DemoHeader("Digital Plots", Demo_DigitalPlots);
-            // DemoHeader("Images", Demo_Images);
-            // DemoHeader("Markers and Text", Demo_MarkersAndText);
+            DemoHeader("Digital Plots", Demo_DigitalPlots);
+            DemoHeader("Images", Demo_Images);
+            DemoHeader("Markers and Text", Demo_MarkersAndText);
             DemoHeader("NaN Values", Demo_NaNValues);
             ImGui::EndTabItem();
         }

@@ -18,7 +18,8 @@ public:
         return true;
     }
     void update() override {
-        spdlog::info("{} update() function. Process data here.", protocol_type());
+        _backend_counter++;
+        spdlog::info("{} update() function. Process data here. Backend Counter: {}", protocol_type(), _backend_counter);
     };
     void shutdown() override {
         spdlog::info("{} shutdown() function. Implement protocol specific cleanup here.", protocol_type());

@@ -22,7 +22,7 @@ bool App::init(const std::vector<DAQ_Protocol> protocols) {
     return true;
 }
 
-void App::update() {
+void App::run() {
     for (size_t i = 0; i < _daq_backend_manager.size(); i++) {
         _daq_backend_manager[i]->update();
     }

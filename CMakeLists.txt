@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 # TODO (Khalid): If user does not have glfw3_FOUND, then install it for them
 find_package(glfw3 CONFIG REQUIRED) # sudo apt-get install libglfw3 libglfw3-dev
 
-# By default, linux should already has this
+# By default, linux should already have this
 find_package(SDL2 REQUIRED)
 
 # TODO (Khalid): Help the user install by checking if it exists or not
@@ -42,16 +42,16 @@ foreach(src ${IMGUI_SRC})
 endforeach()
 
 
-# add_executable(${exec_name} imgui_application_example.cpp ${FULL_IMGUI_SRC_PATH})
+add_executable(imgui_example imgui_application_example.cpp ${FULL_IMGUI_SRC_PATH})
 
-# target_include_directories(${exec_name} PUBLIC 
-#     ${PROJECT_SOURCE_DIR}/include
-#     ${PROTODAQ_MODULES_BASE_DIR}/imgui/include
-#     ${PROTODAQ_MODULES_BASE_DIR}/imgui/src
-#     ${SDL2_INCLUDE_DIRS}
-# )
+target_include_directories(imgui_example PUBLIC 
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROTODAQ_MODULES_BASE_DIR}/imgui/include
+    ${PROTODAQ_MODULES_BASE_DIR}/imgui/src
+    ${SDL2_INCLUDE_DIRS}
+)
 
-# target_link_libraries(${exec_name} PRIVATE glfw glad SDL2::SDL2 OpenGL::GL)
+target_link_libraries(imgui_example PRIVATE glfw glad SDL2::SDL2 OpenGL::GL)
 
 set(PROTODAQ_SRC
     ${PROJECT_SOURCE_DIR}/src/protodaq_application.cpp
@@ -60,14 +60,19 @@ set(PROTODAQ_SRC
     ${PROJECT_SOURCE_DIR}/src/ImDAQ.cpp
 )
 
-add_executable(${exec_name} main.cpp ${PROTODAQ_SRC})
+add_executable(${exec_name} main.cpp ${PROTODAQ_SRC} ${FULL_IMGUI_SRC_PATH})
 
 target_include_directories(${exec_name} PUBLIC 
     ${PROJECT_SOURCE_DIR}/include
-    # ${PROJECT_SOURCE_DIR}/include/protodaq_application.hpp
-    # ${PROJECT_SOURCE_DIR}/include/protodaq_core.hpp
-    # ${PROJECT_SOURCE_DIR}/include/protodaq_common.hpp
-    # ${PROJECT_SOURCE_DIR}/include/backends/protodaq_mavlink.hpp
+    ${PROTODAQ_MODULES_BASE_DIR}/imgui/include
+    ${PROTODAQ_MODULES_BASE_DIR}/imgui/src
+    ${SDL2_INCLUDE_DIRS}
 )
 
-target_link_libraries(${exec_name} PRIVATE spdlog::spdlog)
+target_link_libraries(${exec_name} PRIVATE
+    spdlog::spdlog
+    glfw
+    glad
+    SDL2::SDL2
+    OpenGL::GL
+)
