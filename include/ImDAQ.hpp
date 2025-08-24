@@ -35,6 +35,7 @@ public:
     bool init(const std::vector<DAQ_Protocol> protocols) override;
     void run() override;
     void shutdown() override;
+    void Demo_RealtimePlots();
 
 private:
     SDL_Window *window;

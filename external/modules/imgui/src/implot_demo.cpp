@@ -2150,11 +2150,11 @@ void DemoHeader(const char* label, void(*demo)()) {
 }
 
 void ShowDemoWindow(bool* p_open) {
-    static bool show_implot_metrics      = false;
-    static bool show_implot_style_editor = false;
-    static bool show_imgui_metrics       = false;
-    static bool show_imgui_style_editor  = false;
-    static bool show_imgui_demo          = false;
+    static bool show_implot_metrics      = true;
+    static bool show_implot_style_editor = true;
+    static bool show_imgui_metrics       = true;
+    static bool show_imgui_style_editor  = true;
+    static bool show_imgui_demo          = true;
 
     if (show_implot_metrics) {
         ImPlot::ShowMetricsWindow(&show_implot_metrics);
@@ -2177,107 +2177,109 @@ void ShowDemoWindow(bool* p_open) {
         ImGui::ShowDemoWindow(&show_imgui_demo);
     }
     ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_FirstUseEver);
-    ImGui::SetNextWindowSize(ImVec2(600, 750), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(1620, 900), ImGuiCond_FirstUseEver);
     ImGui::Begin("ImPlot Demo", p_open, ImGuiWindowFlags_MenuBar);
-    if (ImGui::BeginMenuBar()) {
-        if (ImGui::BeginMenu("Tools")) {
-            ImGui::MenuItem("Metrics",      nullptr, &show_implot_metrics);
-            ImGui::MenuItem("Style Editor", nullptr, &show_implot_style_editor);
-            ImGui::Separator();
-            ImGui::MenuItem("ImGui Metrics",       nullptr, &show_imgui_metrics);
-            ImGui::MenuItem("ImGui Style Editor",  nullptr, &show_imgui_style_editor);
-            ImGui::MenuItem("ImGui Demo",          nullptr, &show_imgui_demo);
-            ImGui::EndMenu();
-        }
-        ImGui::EndMenuBar();
-    }
-    //-------------------------------------------------------------------------
-    ImGui::Text("ImPlot says hello. (%s)", IMPLOT_VERSION);
-    // display warning about 16-bit indices
-    static bool showWarning = sizeof(ImDrawIdx)*8 == 16 && (ImGui::GetIO().BackendFlags & ImGuiBackendFlags_RendererHasVtxOffset) == false;
-    if (showWarning) {
-        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1,1,0,1));
-        ImGui::TextWrapped("WARNING: ImDrawIdx is 16-bit and ImGuiBackendFlags_RendererHasVtxOffset is false. Expect visual glitches and artifacts! See README for more information.");
-        ImGui::PopStyleColor();
-    }
+    // if (ImGui::BeginMenuBar()) {
+    //     if (ImGui::BeginMenu("Tools")) {
+    //         ImGui::MenuItem("Metrics",      nullptr, &show_implot_metrics);
+    //         ImGui::MenuItem("Style Editor", nullptr, &show_implot_style_editor);
+    //         ImGui::Separator();
+    //         ImGui::MenuItem("ImGui Metrics",       nullptr, &show_imgui_metrics);
+    //         ImGui::MenuItem("ImGui Style Editor",  nullptr, &show_imgui_style_editor);
+    //         ImGui::MenuItem("ImGui Demo",          nullptr, &show_imgui_demo);
+    //         ImGui::EndMenu();
+    //     }
+    //     ImGui::EndMenuBar();
+    // }
+    // //-------------------------------------------------------------------------
+    // ImGui::Text("ImPlot says hello. (%s)", IMPLOT_VERSION);
+    // // display warning about 16-bit indices
+    // static bool showWarning = sizeof(ImDrawIdx)*8 == 16 && (ImGui::GetIO().BackendFlags & ImGuiBackendFlags_RendererHasVtxOffset) == false;
+    // if (showWarning) {
+    //     ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1,1,0,1));
+    //     ImGui::TextWrapped("WARNING: ImDrawIdx is 16-bit and ImGuiBackendFlags_RendererHasVtxOffset is false. Expect visual glitches and artifacts! See README for more information.");
+    //     ImGui::PopStyleColor();
+    // }
 
-    ImGui::Spacing();
+    // ImGui::Spacing();
 
-    if (ImGui::BeginTabBar("ImPlotDemoTabs")) {
-        if (ImGui::BeginTabItem("Plots")) {
-            DemoHeader("Line Plots", Demo_LinePlots);
-            // DemoHeader("Filled Line Plots", Demo_FilledLinePlots);
-            // DemoHeader("Shaded Plots##", Demo_ShadedPlots);
-            DemoHeader("Scatter Plots", Demo_ScatterPlots);
-            DemoHeader("Realtime Plots", Demo_RealtimePlots);
-            // DemoHeader("Stairstep Plots", Demo_StairstepPlots);
-            // DemoHeader("Bar Plots", Demo_BarPlots);
-            // DemoHeader("Bar Groups", Demo_BarGroups);
-            // DemoHeader("Bar Stacks", Demo_BarStacks);
-            // DemoHeader("Error Bars", Demo_ErrorBars);
-            // DemoHeader("Stem Plots##", Demo_StemPlots);
-            // DemoHeader("Infinite Lines", Demo_InfiniteLines);
-            // DemoHeader("Pie Charts", Demo_PieCharts);
-            // DemoHeader("Heatmaps", Demo_Heatmaps);
-            // DemoHeader("Histogram", Demo_Histogram);
-            DemoHeader("Histogram 2D", Demo_Histogram2D);
-            // DemoHeader("Digital Plots", Demo_DigitalPlots);
-            // DemoHeader("Images", Demo_Images);
-            // DemoHeader("Markers and Text", Demo_MarkersAndText);
-            DemoHeader("NaN Values", Demo_NaNValues);
-            ImGui::EndTabItem();
-        }
-        if (ImGui::BeginTabItem("Subplots")) {
-            DemoHeader("Sizing", Demo_SubplotsSizing);
-            DemoHeader("Item Sharing", Demo_SubplotItemSharing);
-            DemoHeader("Axis Linking", Demo_SubplotAxisLinking);
-            DemoHeader("Tables", Demo_Tables);
-            ImGui::EndTabItem();
-        }
-        if (ImGui::BeginTabItem("Axes")) {
-            DemoHeader("Log Scale", Demo_LogScale);
-            DemoHeader("Symmetric Log Scale", Demo_SymmetricLogScale);
-            DemoHeader("Time Scale", Demo_TimeScale);
-            DemoHeader("Custom Scale", Demo_CustomScale);
-            DemoHeader("Multiple Axes", Demo_MultipleAxes);
-            DemoHeader("Tick Labels", Demo_TickLabels);
-            DemoHeader("Linked Axes", Demo_LinkedAxes);
-            DemoHeader("Axis Constraints", Demo_AxisConstraints);
-            DemoHeader("Equal Axes", Demo_EqualAxes);
-            DemoHeader("Auto-Fitting Data", Demo_AutoFittingData);
-            ImGui::EndTabItem();
-        }
-        if (ImGui::BeginTabItem("Tools")) {
-            DemoHeader("Offset and Stride", Demo_OffsetAndStride);
-            DemoHeader("Drag Points", Demo_DragPoints);
-            DemoHeader("Drag Lines", Demo_DragLines);
-            DemoHeader("Drag Rects", Demo_DragRects);
-            DemoHeader("Querying", Demo_Querying);
-            DemoHeader("Annotations", Demo_Annotations);
-            DemoHeader("Tags", Demo_Tags);
-            DemoHeader("Drag and Drop", Demo_DragAndDrop);
-            DemoHeader("Legend Options", Demo_LegendOptions);
-            DemoHeader("Legend Popups", Demo_LegendPopups);
-            DemoHeader("Colormap Widgets", Demo_ColormapWidgets);
-            ImGui::EndTabItem();
-        }
-        if (ImGui::BeginTabItem("Custom")) {
-            DemoHeader("Custom Styles", Demo_CustomStyles);
-            DemoHeader("Custom Data and Getters", Demo_CustomDataAndGetters);
-            DemoHeader("Custom Rendering", Demo_CustomRendering);
-            DemoHeader("Custom Plotters and Tooltips", Demo_CustomPlottersAndTooltips);
-            ImGui::EndTabItem();
-        }
-        if (ImGui::BeginTabItem("Config")) {
-            Demo_Config();
-            ImGui::EndTabItem();
-        }
-        if (ImGui::BeginTabItem("Help")) {
-            Demo_Help();
-            ImGui::EndTabItem();
-        }
-        ImGui::EndTabBar();
-    }
+    Demo_RealtimePlots();
+
+    // if (ImGui::BeginTabBar("ImPlotDemoTabs")) {
+    //     if (ImGui::BeginTabItem("Plots")) {
+    //         DemoHeader("Line Plots", Demo_LinePlots);
+    //         // DemoHeader("Filled Line Plots", Demo_FilledLinePlots);
+    //         // DemoHeader("Shaded Plots##", Demo_ShadedPlots);
+    //         DemoHeader("Scatter Plots", Demo_ScatterPlots);
+    //         DemoHeader("Realtime Plots", Demo_RealtimePlots);
+    //         // DemoHeader("Stairstep Plots", Demo_StairstepPlots);
+    //         // DemoHeader("Bar Plots", Demo_BarPlots);
+    //         // DemoHeader("Bar Groups", Demo_BarGroups);
+    //         // DemoHeader("Bar Stacks", Demo_BarStacks);
+    //         // DemoHeader("Error Bars", Demo_ErrorBars);
+    //         // DemoHeader("Stem Plots##", Demo_StemPlots);
+    //         // DemoHeader("Infinite Lines", Demo_InfiniteLines);
+    //         // DemoHeader("Pie Charts", Demo_PieCharts);
+    //         // DemoHeader("Heatmaps", Demo_Heatmaps);
+    //         // DemoHeader("Histogram", Demo_Histogram);
+    //         DemoHeader("Histogram 2D", Demo_Histogram2D);
+    //         // DemoHeader("Digital Plots", Demo_DigitalPlots);
+    //         // DemoHeader("Images", Demo_Images);
+    //         // DemoHeader("Markers and Text", Demo_MarkersAndText);
+    //         DemoHeader("NaN Values", Demo_NaNValues);
+    //         ImGui::EndTabItem();
+    //     }
+    //     if (ImGui::BeginTabItem("Subplots")) {
+    //         DemoHeader("Sizing", Demo_SubplotsSizing);
+    //         DemoHeader("Item Sharing", Demo_SubplotItemSharing);
+    //         DemoHeader("Axis Linking", Demo_SubplotAxisLinking);
+    //         DemoHeader("Tables", Demo_Tables);
+    //         ImGui::EndTabItem();
+    //     }
+    //     if (ImGui::BeginTabItem("Axes")) {
+    //         DemoHeader("Log Scale", Demo_LogScale);
+    //         DemoHeader("Symmetric Log Scale", Demo_SymmetricLogScale);
+    //         DemoHeader("Time Scale", Demo_TimeScale);
+    //         DemoHeader("Custom Scale", Demo_CustomScale);
+    //         DemoHeader("Multiple Axes", Demo_MultipleAxes);
+    //         DemoHeader("Tick Labels", Demo_TickLabels);
+    //         DemoHeader("Linked Axes", Demo_LinkedAxes);
+    //         DemoHeader("Axis Constraints", Demo_AxisConstraints);
+    //         DemoHeader("Equal Axes", Demo_EqualAxes);
+    //         DemoHeader("Auto-Fitting Data", Demo_AutoFittingData);
+    //         ImGui::EndTabItem();
+    //     }
+    //     if (ImGui::BeginTabItem("Tools")) {
+    //         DemoHeader("Offset and Stride", Demo_OffsetAndStride);
+    //         DemoHeader("Drag Points", Demo_DragPoints);
+    //         DemoHeader("Drag Lines", Demo_DragLines);
+    //         DemoHeader("Drag Rects", Demo_DragRects);
+    //         DemoHeader("Querying", Demo_Querying);
+    //         DemoHeader("Annotations", Demo_Annotations);
+    //         DemoHeader("Tags", Demo_Tags);
+    //         DemoHeader("Drag and Drop", Demo_DragAndDrop);
+    //         DemoHeader("Legend Options", Demo_LegendOptions);
+    //         DemoHeader("Legend Popups", Demo_LegendPopups);
+    //         DemoHeader("Colormap Widgets", Demo_ColormapWidgets);
+    //         ImGui::EndTabItem();
+    //     }
+    //     if (ImGui::BeginTabItem("Custom")) {
+    //         DemoHeader("Custom Styles", Demo_CustomStyles);
+    //         DemoHeader("Custom Data and Getters", Demo_CustomDataAndGetters);
+    //         DemoHeader("Custom Rendering", Demo_CustomRendering);
+    //         DemoHeader("Custom Plotters and Tooltips", Demo_CustomPlottersAndTooltips);
+    //         ImGui::EndTabItem();
+    //     }
+    //     if (ImGui::BeginTabItem("Config")) {
+    //         Demo_Config();
+    //         ImGui::EndTabItem();
+    //     }
+    //     if (ImGui::BeginTabItem("Help")) {
+    //         Demo_Help();
+    //         ImGui::EndTabItem();
+    //     }
+    //     ImGui::EndTabBar();
+    // }
     ImGui::End();
 }
 
