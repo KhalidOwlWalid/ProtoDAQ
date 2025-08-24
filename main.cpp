@@ -1,9 +1,10 @@
 #include "include/protodaq_application.hpp"
 
 int main() {
-    DAQ_App daq_app;
+    ProtoDAQ::App daq_app;
 
-    std::vector<DAQ_Protocol> protocols_to_use {DAQ_Protocol::UDP, DAQ_Protocol::MAVLINK};
+    // std::vector<DAQ_Protocol> protocols_to_use {DAQ_Protocol::UDP, DAQ_Protocol::MAVLINK};
+    std::vector<DAQ_Protocol> protocols_to_use {DAQ_Protocol::MAVLINK};
 
     if (!daq_app.init(protocols_to_use)) {
         spdlog::error("DAQ fails to initialize due to invalid protocol. Force closing the application.");

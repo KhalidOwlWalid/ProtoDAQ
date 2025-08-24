@@ -2,21 +2,19 @@
 
 #include "../protodaq_core.hpp"
 
-namespace ProtoDAQ {
-
-class Mavlink: public DAQ_Backend {
+class DAQ_UDP: public DAQ_Backend {
 
 public:
-    Mavlink() = default;
-    ~Mavlink() = default;
+    DAQ_UDP() = default;
+    ~DAQ_UDP() = default;
 
     // Overriding the virtual function from parent class
     void setup() override {};
 
+
     bool init() override {
         spdlog::info("{} init() function. Initialize protocol specific socket/implementation.", protocol_type());
-        return true;
-    }
+    };
     void update() override {
         spdlog::info("{} update() function. Process data here.", protocol_type());
     };
@@ -24,11 +22,12 @@ public:
         spdlog::info("{} shutdown() function. Implement protocol specific cleanup here.", protocol_type());
     };
 
-    const char *protocol_type() const override { return "Mavlink"; }
+    const char *protocol_type() const override { return "UDP"; }
 
-    void send_heartbeat() {};
-    void listen_to_heartbeat() {};
-    void send_mavlink_packets() {};
+    // Protocol specific functions or variables
+    // Please read my notes on protocol specific functions in DAQ_Mavlink
+    void parse_udp_packets();
+    void receive_udp_packets();
+
 };
 
-}
