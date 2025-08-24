@@ -57,6 +57,7 @@ set(PROTODAQ_SRC
     ${PROJECT_SOURCE_DIR}/src/protodaq_application.cpp
     ${PROJECT_SOURCE_DIR}/src/protodaq_core.cpp
     ${PROJECT_SOURCE_DIR}/src/backends/protodaq_mavlink.cpp
+    ${PROJECT_SOURCE_DIR}/src/ImDAQ.cpp
 )
 
 add_executable(${exec_name} main.cpp ${PROTODAQ_SRC})
