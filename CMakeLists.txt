@@ -41,7 +41,7 @@ foreach(src ${IMGUI_SRC})
 endforeach()
 
 
-add_executable(${exec_name} main.cpp ${FULL_IMGUI_SRC_PATH})
+add_executable(${exec_name} imgui_application_example.cpp ${FULL_IMGUI_SRC_PATH})
 
 target_include_directories(${exec_name} PUBLIC 
     ${PROJECT_SOURCE_DIR}/include
